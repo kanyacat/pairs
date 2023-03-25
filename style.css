@@ -1,0 +1,25 @@
+.container {
+  margin: 50px;
+}
+
+.cards__container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.card__item {
+  width: 25%;
+  margin-bottom: 25px;
+}
+
+.card__btn {
+  padding: 50px;
+  background-color: darkseagreen;
+  border-color: darkolivegreen;
+}
+
+.btn__open {
+  background-color: cadetblue;
+}
