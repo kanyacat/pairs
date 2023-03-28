@@ -1,5 +1,7 @@
 (function () {
   let arrayNum = [];
+  let openNum;
+  let openCount = 0;
 
   function index(element) {
     return Array.from(element.parentNode.children).indexOf(element);
@@ -17,7 +19,29 @@
     btn.addEventListener("click", function () {
       let done = btn.classList.toggle("btn__open");
       arrayNum[index(item)].open = done;
-      console.log(arrayNum[index(item)]);
+      // console.log(arrayNum[index(item)]);
+      openCount += 1;
+
+      console.log(openCount);
+      if (openCount == 2) {
+        arrayNum.forEach((element) => {
+          if (
+            element.open == true &&
+            element != arrayNum[index(item)] &&
+            element.num == openNum
+          ) {
+            item.classList.add("btn__disable");
+
+            openNum = -1;
+          }
+
+          openNum = arrayNum[index(item)].num;
+        });
+        openCount = 0;
+
+        btn.classList.toggle("btn__open");
+      }
+      openNum = arrayNum[index(item)].num;
     });
 
     item.append(btn);
@@ -38,7 +62,7 @@
       cards.append(cardItem);
     }
 
-    console.log(arrayNum);
+    // console.log(arrayNum);
   }
 
   createCards();

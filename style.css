@@ -23,3 +23,8 @@
 .btn__open {
   background-color: cadetblue;
 }
+
+.btn__disable {
+  background-color: darkgrey;
+  display: none;
+}
