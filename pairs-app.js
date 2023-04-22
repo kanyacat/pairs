@@ -31,13 +31,13 @@ var win = 0;
 
 var choise = document.querySelector(".choise__section");
 var themesElt = document.querySelector(".choise");
-var boxElts = document.getElementsByClassName("box");
-var mainElt = document.querySelector(".main");
-var postElt = document.querySelector(".final__section");
-var finalElt = document.querySelector(".final__result");
+var boxEl = document.getElementsByClassName("box");
+var main = document.querySelector(".main");
+var finalWindow = document.querySelector(".final__section");
+var finalRes = document.querySelector(".final__result");
 var againBtn = document.querySelector(".again__btn");
 
-mainElt.addEventListener("click", gameLogic);
+main.addEventListener("click", gameLogic);
 againBtn.addEventListener("click", resetGame);
 
 // initiate the game with chosen theme
@@ -56,33 +56,33 @@ function activateTheme(theme) {
   // insert images in memory game
   for (let i = 0; i < 20; i++) {
     var rand = Math.floor(Math.random() * (images.length - 1));
-    boxElts[i].innerHTML =
+    boxEl[i].innerHTML =
       "<img src='" + images[rand] + "' alt='image' class='hidden'>";
     images.splice(rand, 1); //чтоб не было повторений
   }
 }
 
-function gameLogic(e) {
+function gameLogic(element) {
   // make sure the box is playable
-  if (e.target.classList.contains("play")) {
-    e.target.firstChild.classList.remove("hidden");
+  if (element.target.classList.contains("play")) {
+    element.target.firstChild.classList.remove("hidden");
     // first of two click
     if (click < 1) {
-      tempElt1 = e.target;
+      tempElt1 = element.target;
       click = 1;
     }
 
     // second click
-    else if (e.target !== tempElt1) {
-      tempElt2 = e.target;
+    else if (element.target !== tempElt1) {
+      tempElt2 = element.target;
 
       // different images
       if (tempElt1.firstChild.src !== tempElt2.firstChild.src) {
-        mainElt.removeEventListener("click", gameLogic);
+        main.removeEventListener("click", gameLogic);
         setTimeout(function () {
           tempElt1.firstChild.classList.add("hidden");
           tempElt2.firstChild.classList.add("hidden");
-          mainElt.addEventListener("click", gameLogic);
+          main.addEventListener("click", gameLogic);
         }, 400);
       }
 
@@ -96,8 +96,8 @@ function gameLogic(e) {
 
         // game won
         if (win === 20) {
-          finalElt.innerHTML = "You won";
-          postElt.classList.remove("hidden");
+          finalRes.innerHTML = "You won";
+          finalWindow.classList.remove("hidden");
         }
       }
       click = 0;
@@ -111,10 +111,10 @@ function resetGame() {
   tempElt2 = "";
   click = -1;
   win = 0;
-  postElt.classList.add("hidden");
+  finalWindow.classList.add("hidden");
   choise.classList.remove("hidden");
   for (let i = 0; i < 20; i++) {
-    boxElts[i].classList.add("play");
-    boxElts[i].firstChild.classList.add("hidden");
+    boxEl[i].classList.add("play");
+    boxEl[i].firstChild.classList.add("hidden");
   }
 }
