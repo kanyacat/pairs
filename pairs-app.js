@@ -29,12 +29,11 @@ var tempElt2 = "";
 var click = -1;
 var win = 0;
 
-var choise = document.querySelector(".choise__section");
-var themesElt = document.querySelector(".choise");
+var choice = document.querySelector(".choice__section");
+var themesElt = document.querySelector(".choice");
 var boxEl = document.getElementsByClassName("box");
 var main = document.querySelector(".main");
 var finalWindow = document.querySelector(".final__section");
-var finalRes = document.querySelector(".final__result");
 var againBtn = document.querySelector(".again__btn");
 
 main.addEventListener("click", gameLogic);
@@ -44,7 +43,7 @@ againBtn.addEventListener("click", resetGame);
 themesElt.addEventListener("click", function (e) {
   if (e.target.classList.contains("themes")) {
     activateTheme(e.target.id);
-    choise.classList.add("hidden");
+    choice.classList.add("hidden");
   }
 });
 
@@ -96,7 +95,6 @@ function gameLogic(element) {
 
         // game won
         if (win === 20) {
-          finalRes.innerHTML = "You won";
           finalWindow.classList.remove("hidden");
         }
       }
@@ -112,7 +110,7 @@ function resetGame() {
   click = -1;
   win = 0;
   finalWindow.classList.add("hidden");
-  choise.classList.remove("hidden");
+  choice.classList.remove("hidden");
   for (let i = 0; i < 20; i++) {
     boxEl[i].classList.add("play");
     boxEl[i].firstChild.classList.add("hidden");
